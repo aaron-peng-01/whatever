@@ -525,7 +525,7 @@ The results may be as below:
 
 ---
 
-##What You’ve Built
+## What You’ve Built
 
 You now have a fully trustless local delivery platform where orders, payments, and reputation flow through programmable, verifiable logic. Customers, merchants, and couriers interact under transparent rules with automated protection at every step.
 
