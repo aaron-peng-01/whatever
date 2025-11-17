@@ -20,9 +20,10 @@ Following this chain prevents “object already referenced/cannot modify” erro
 
 The permission layer keeps every later object under a single governance umbrella. It defines the custom indices used by Repository policies and grants the admin address the ability to operate guards, machines, and treasuries. Clone this whenever you roll out a new city and simply swap the admin address.
 
-> 💡 Agent Prompt 1: Create the foundational permission object for delivery platform governance, establishe custom permission indices (1120-1123) for customer verification, order reputation, merchant operations, and rider geolocation tracking across the entire delivery ecosystem.
+> 💡 Agent Prompt: Create the foundational permission object for delivery platform governance, establishe custom permission indices (1120-1123) for customer verification, order reputation, merchant operations, and rider geolocation tracking across the entire delivery ecosystem.
 
 > Replace {ADMIN} with your actual admin address before executing.
+
 ```json
 {
   "account": "{ADMIN}",
@@ -68,10 +69,10 @@ The permission layer keeps every later object under a single governance umbrella
 
 Create the payout pool once and reuse it across services. The treasury inherits the same permission object so that only approved operators can deposit/withdraw funds from the delivery business.
 
-// Agent Prompt 3: Establish the treasury for delivery platform financial operations
-// Creates the central payout pool that manages all delivery-related transactions,
-// incentives, and withdrawals with proper permission controls
-// Replace {ADMIN} and {PERMISSION_ADDRESS} with your actual addresses
+>💡 Agent Prompt: Establish the treasury for delivery platform financial operations, creates the central payout pool that manages all delivery-related transactions, incentives, and withdrawals with proper permission controls.
+
+>Replace {ADMIN} and {PERMISSION_ADDRESS} with your actual addresses
+
 ```json
 {
   "account": "{ADMIN}",
@@ -92,9 +93,9 @@ Create the payout pool once and reuse it across services. The treasury inherits 
 
 This repository acts as the evidence vault. Each field lines up with a specific business event—buyer vetting, merchant prep proof, courier status, or final reputation summary. Because the repository runs in strict mode, only addresses with the correct permission index can write to each field.
 
-// Agent Prompt 2: Initialize the evidence repository for delivery platform data integrity. Creates strict-mode data policies for customer verification, order snapshots, rider tracking, and reputation records with proper permission-based access control.
+>💡 Agent Prompt: Initialize the evidence repository for delivery platform data integrity. Creates strict-mode data policies for customer verification, order snapshots, rider tracking, and reputation records with proper permission-based access control.
 
-// Replace {ADMIN} and {PERMISSION_ADDRESS} with your actual addresses
+>Replace {ADMIN} and {PERMISSION_ADDRESS} with your actual addresses
 
 ```json
 {
@@ -125,11 +126,9 @@ This repository acts as the evidence vault. Each field lines up with a specific 
 
 Disputes reference the same evidence the workflow produces. This arbitration object shares the Permission with the rest of the stack and creates its own fee treasury so arbitrators can be compensated.
 
+>💡 Agent Prompt: Establish arbitration system with fee treasury for dispute resolution. Creates the arbitration board and dedicated fee treasury to handle delivery disputes and compensate arbitrators while maintaining permission consistency with the platform.
+
 ```json
-// Agent Prompt 12: Establish arbitration system with fee treasury for dispute resolution
-// Creates the arbitration board and dedicated fee treasury to handle delivery disputes
-// and compensate arbitrators while maintaining permission consistency with the platform
-// Replace {ADMIN} and {PERMISSION_ADDRESS} with your actual addresses
 {
   "account": "{ADMIN}",
   "data": {
@@ -153,10 +152,7 @@ Disputes reference the same evidence the workflow produces. This arbitration obj
 }
 ```
 
-// Agent Prompt 13: Connect arbitration system to the main delivery service
-// Final step to integrate dispute resolution capabilities with the service,
-// enabling customers to escalate issues and arbitrators to resolve conflicts
-// Replace {ADMIN}, {SERVICE_ADDRESS}, and {ARBITRATION_ADDRESS} with your actual addresses
+>💡 Agent Prompt: Connect arbitration system to the main delivery service.
 
 ```json
 {
@@ -173,14 +169,12 @@ Disputes reference the same evidence the workflow produces. This arbitration obj
 
 ## 5. Guard Suite
 
-### 4.1 Buyer Guard (`guard_customer_verified`)
+### 5.1 Buyer Guard (`guard_customer_verified`)
 
 White-listing keeps fake buyers out of the workflow. This guard checks whether the transaction signer is either the designated customer account or the admin (useful for dry runs and emergency overrides).
 
-// Agent Prompt 4: Create customer verification guard for buyer access control
-// Implements whitelist-based authentication allowing only verified customers
-// and admin to interact with order placement and confirmation processes
-// Replace {ADMIN} and {USR} with your actual addresses
+>💡 Agent Prompt: Create customer verification guard for buyer access control. Implements whitelist-based authentication allowing only verified customers and admin to interact with order placement and confirmation processes.
+
 ```json
 {
   "account": "{ADMIN}",
@@ -214,14 +208,12 @@ White-listing keeps fake buyers out of the workflow. This guard checks whether t
 }
 ```
 
-### 4.2 Withdrawal Guard (`guard_reputation_withdraw`)
+### 5.2 Withdrawal Guard (`guard_reputation_withdraw`)
 
 Withdrawals are delayed until an admin attests the workflow is complete (witness flag). Later you can swap this guard for one that queries the repository or progress history once the guard MPC server supports it.
 
-// Agent Prompt 7: Configure withdrawal guard for treasury fund release
-// Enforces admin attestation requirement before allowing fund withdrawals,
-// ensuring completion verification before financial settlements
-// Replace {ADMIN} with your actual admin address
+>💡 Agent Prompt: Configure withdrawal guard for treasury fund release. Enforces admin attestation requirement before allowing fund withdrawals, ensuring completion verification before financial settlements.
+
 ```json
 {
   "account": "{ADMIN}",
@@ -259,6 +251,10 @@ Withdrawals are delayed until an admin attests the workflow is complete (witness
 ```
 
 ## 6. Machine Workflow
+
+Now create the machine object following the process shown in the diagram.
+
+<img width="699" height="604" alt="Screenshot 2025-11-06 at 9 46 13 PM" src="https://github.com/user-attachments/assets/4fc0e352-26db-4fd3-8802-9cc3e84d77bb" />
 
 ```json
 {
@@ -456,11 +452,9 @@ Withdrawals are delayed until an admin attests the workflow is complete (witness
 
 Publishing locks the Machine forever, so only do this once all guard references check out. Keep `bPaused=true` until you're ready to let services spawn new progress instances.
 
+>💡 Agent Prompt: Publish the guarded workflow machine to blockchain. 
+
 ```json
-// Agent Prompt 10: Publish the guarded workflow machine to blockchain
-// Finalizes the machine configuration and makes it immutable on-chain
-// Set bPaused=true initially to prevent premature usage during testing phase
-// Replace {ADMIN} and {NEW_MACHINE} with your actual addresses
 {
   "account": "{ADMIN}",
   "data": {
@@ -471,18 +465,13 @@ Publishing locks the Machine forever, so only do this once all guard references 
 }
 ```
 
----
-
-## 6. Service (Storefront)
+## 7. Service (Storefront)
 
 The service brings everything together: it points to the guarded Machine, binds the Treasury, and sets the buy/withdraw guards. Publish only after you verify prices, stock, and required info.
 
+>💡 Agent Prompt: Deploy the delivery service storefront with integrated guards. Creates the main service interface connecting machine workflow, treasury payments, and role-based access controls for customer purchases and withdrawals
+
 ```json
-// Agent Prompt 11: Deploy the delivery service storefront with integrated guards
-// Creates the main service interface connecting machine workflow, treasury payments,
-// and role-based access controls for customer purchases and withdrawals
-// Replace {ADMIN}, {PERMISSION_ADDRESS}, {NEW_MACHINE}, {TREASURY_ADDRESS}, 
-// {GUARD_CUSTOMER}, and {GUARD_WITHDRAW} with your actual addresses
 {
   "account": "{ADMIN}",
   "data": {
