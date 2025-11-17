@@ -65,6 +65,9 @@ The permission layer keeps every later object under a single governance umbrella
 }
 ```
 
+The results may be as below:
+<img width="977" height="771" alt="Screenshot 2025-11-14 at 6 58 24 PM" src="https://github.com/user-attachments/assets/e451601d-ed81-4406-ab66-5c38d89dbd18" />
+
 ## 2. Treasury Configuration
 
 Create the payout pool once and reuse it across services. The treasury inherits the same permission object so that only approved operators can deposit/withdraw funds from the delivery business.
@@ -88,6 +91,9 @@ Create the payout pool once and reuse it across services. The treasury inherits 
   }
 }
 ```
+
+The results may be as below:
+<img width="976" height="671" alt="Screenshot 2025-11-14 at 7 00 02 PM" src="https://github.com/user-attachments/assets/098060bb-fa0a-4ad0-8e6c-3447e0c70b64" />
 
 ## 3. Repository (Strict Mode)
 
@@ -122,6 +128,9 @@ This repository acts as the evidence vault. Each field lines up with a specific 
 }
 ```
 
+The results may be as below:
+<img width="977" height="749" alt="Screenshot 2025-11-14 at 6 59 23 PM" src="https://github.com/user-attachments/assets/f72945ec-1282-48a1-8830-e2ff9c33e7f8" />
+
 ## 4. Arbitration + Fee Treasury
 
 Disputes reference the same evidence the workflow produces. This arbitration object shares the Permission with the rest of the stack and creates its own fee treasury so arbitrators can be compensated.
@@ -151,6 +160,9 @@ Disputes reference the same evidence the workflow produces. This arbitration obj
   }
 }
 ```
+
+The results may be as below:
+<img width="976" height="483" alt="Screenshot 2025-11-14 at 7 02 13 PM" src="https://github.com/user-attachments/assets/892f0450-e089-4d28-952b-ea72da69f5bd" />
 
 >💡 Agent Prompt: Connect arbitration system to the main delivery service.
 
@@ -249,6 +261,9 @@ Withdrawals are delayed until an admin attests the workflow is complete (witness
   }
 }
 ```
+
+The results may be as below:
+<img width="976" height="709" alt="Screenshot 2025-11-14 at 7 03 03 PM" src="https://github.com/user-attachments/assets/3d12c886-3390-46b2-8909-174eda42b3f2" />
 
 ## 6. Machine Workflow
 
@@ -504,3 +519,6 @@ The service brings everything together: it points to the guarded Machine, binds 
   }
 }
 ```
+
+The results may be as below:
+<img width="976" height="419" alt="Screenshot 2025-11-14 at 7 01 33 PM" src="https://github.com/user-attachments/assets/ddcfba4d-903b-4e2f-a0e1-a00dffe4322f" />
