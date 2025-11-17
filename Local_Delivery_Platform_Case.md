@@ -1,53 +1,64 @@
-### Delivery
+# **Project Overview: Local Delivery Platform Based on Wowok**
 
-Delivery is a Wowok-native food delivery network that combines merchant craftsmanship, trusted couriers, and programmable workflows. Customers describe the meal and constraints once; Service objects, Machine workflows, Guards, and Repository data make sure every promise is executed transparently.
+This project implements a minimal framework of a food-delivery platform, built natively on Wowok and integrating merchant craftsmanship, trusted couriers, and programmable workflows. Customers describe the meal and constraints to AI agent once, Service objects, Machine workflows, Guards, and Repository data make sure every promise is executed transparently.
 
-### Core Capability
+## Core Capability
 
-- **Programmable Trust**
+- **User-Owned Data & Verifiable Transparency**
   
-  Every role—customer, merchant, courier—is bound to Guards and Permissions. Payments, refunds, and reputation updates only happen when the workflow reaches the right nodes.
+  User identity, order history, and reputation belong to the individual rather than the platform.
+  All order and delivery records are anchored on-chain, creating transparent, publicly verifiable evidence that prevents manipulation, fraud, or hidden changes.
 
-- **Evidence-Driven Reputation**
+- **Token-Aligned Incentives & Governance**
   
-  The shared Repository captures merchant prep snapshots, rider geolocation, and customer feedback. Guards and arbitration can query the same dataset, giving everyone a single source of truth.
+  Token incentives are directly tied to governance rights, ensuring that those who contribute value also shape the system’s direction.
+  Participants maximize earnings through transparent reward mechanisms, forming a sustainable, self-reinforcing economic loop that benefits merchants, riders, and customers alike.
 
-- **Instant Reconfiguration**
+- **Trustless Reputation & Automated Arbitration**
   
-  Need a new merchant or courier? Clone the Permission/Machine/Service objects, swap in new addresses, and keep the battle-tested workflow unchanged.
-
-- **Dispute Automation**
-  
-  Arbitration objects link directly to every Service. When disputes happen, the same reputation data and workflow history feed into arbitrator judgments and Treasury-managed payouts.
+  Reputation scores and delivery records are stored on-chain to eliminate fabricated ratings and opaque scoring.
+  Smart contracts automate settlement and payout flows, minimizing trust assumptions and enabling trustless, evidence-based dispute resolution.
 
 ## Inspiration Scenarios
 
-- **Lunch Rush**
+- **Fair & Transparent Ordering for Customers**
   
-  Multiple merchants share the same workflow and Guard set. Couriers can accept new routes only when their previous nodes are validated.
+  Ordering becomes effortless with clear, upfront pricing.
+  Smart contracts guarantee trustless transactions without intermediaries, while token rewards incentivize honest reviews and participation.
+  Decentralized identity (DID) protects users from algorithmic discrimination and hidden pricing strategies.
 
-- **Premium Experiences**
+- **Merchant Autonomy & Direct Earnings**
   
-  Extend the Repository schema with tasting notes, sommelier feedback, or photo proof, then reuse the same withdrawal guard to ensure bonuses unlock only after customers confirm receipt.
+  Merchants fully control product listings and pricing without dependence on centralized platforms.
+  Orders and settlements arrive instantly through smart-contract execution, ensuring predictable cash flow.
+  No platform commissions or paid ranking—every merchant competes on service and reputation alone.
 
-- **Regional Fleets**
+- **Courier Freedom & On-Chain Reputation**
   
-  Clone the Machine for a new city. Each clone references a different merchant/courier set but keeps the arbitration + reputation logic consistent.
+  Couriers pick up orders freely without intermediaries, commissions, or opaque dispatch algorithms.
+  Reputation is driven by transparent, on-chain scoring, giving riders long-term credibility they truly own.
+  Delivery incentives are distributed through token-based reward mechanisms to support high-quality, reliable service.
 
 ## Implementation Case Snapshot
 
-### Delivery Platform: Building Blocks
+🔐 Permission manages all operators and custom permissions (1120–1123).
 
-- **Permission** `0x1b9aa15e…96c1a` manages all operators and custom permissions (1120–1123).
-- **Repository** `0x61f69895…c8cb` stores `customer_verification`, `order_ready_snapshot`, `rider_geolocation`, and `order_reputation_record`.
-- **Guards**
-  - `guard_customer_verified` `0x2930…f06d` ensures only approved buyers confirm/operate.
-  - `guard_merchant_operator` `0x7af3…aab9` locks merchant nodes to the real merchant.
-  - `guard_rider_operator` `0xa4a7…4c4e` locks courier nodes to the registered rider.
-  - `guard_reputation_withdraw` `0x7728…932a` blocks withdrawals until the workflow reaches the validation node.
-- **Machine** `0xead0adee…a7be` is the published workflow with Guard-protected forwards.
-- **Service** `0x17e18c19…b699` exposes “Food Menu” with the same Guards & Treasury.
-- **Treasury** `0xa6125d86…6a9e` aggregates payments and incentives.
-- **Arbitration** `0xd5e45309…468d` + fee Treasury `0x9f1f1199…97c8` resolve disputes based on the shared evidence.
+🗄️ Repository stores customer_verification, order_ready_snapshot, rider_geolocation, order_reputation_record, and more.
+
+🛡️ Guards:
+
+  - guard_customer_verified ensures only approved buyers can confirm/operate.
+  
+  - guard_reputation_withdraw blocks withdrawals until the workflow reaches the validation node.
+
+⚙️ Machine is the published workflow with Guard-protected forwards.
+
+🍽️ Service exposes the Food Menu with the same Guards & Treasury.
+
+💰 Treasury aggregates payments and incentives.
+
+⚖️ Arbitration resolves disputes based on the shared evidence.
 
 This stack delivers a repeatable food delivery experience: customers, merchants, riders, and arbitrators all act against the same programmable rules, and every node is backed by on-chain data rather than verbal promises.
+
+***🌟 By customizing Wowok objects, you can implement more advanced capabilities that are far more sophisticated and complete than the ones in this project.***
